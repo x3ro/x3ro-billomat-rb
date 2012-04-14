@@ -20,8 +20,8 @@ begin
     gem.homepage = "http://github.com/rbecher/billomat-rb"
     gem.authors = ["Ronald Becher"]
     gem.rubyforge_project = "billomat-rb"
-    gem.add_dependency(%q<activesupport>, [">= 2.3.2"])
-    gem.add_dependency(%q<activeresource>, [">= 2.3.2"])
+    gem.add_dependency(%q<activesupport>, [">= 3.2.3"])
+    gem.add_dependency(%q<activeresource>, [">= 3.2.3"])
   end
   Jeweler::RubyforgeTasks.new do |rubyforge|
     rubyforge.doc_task = "rdoc"

@@ -1,6 +1,6 @@
 require 'rubygems'
-gem 'activeresource', '=2.3.5'
-gem 'activesupport', '=2.3.5'
+gem 'activeresource', '>=3.2.3'
+gem 'activesupport', '>=3.2.3'
 require 'active_support'
 require 'active_resource'
 
