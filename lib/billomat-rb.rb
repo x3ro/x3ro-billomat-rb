@@ -105,10 +105,10 @@ end
 
 
 require File.dirname(__FILE__) + '/billomat/exceptions'
+require File.dirname(__FILE__) + '/billomat/resource_types'
 require File.dirname(__FILE__) + '/billomat/base'
 require File.dirname(__FILE__) + '/billomat/singleton_base'
 require File.dirname(__FILE__) + '/billomat/read_only_singleton_base'
-require File.dirname(__FILE__) + '/billomat/resource_types'
 
 require File.dirname(__FILE__) + '/billomat/api-resources/settings'
 require File.dirname(__FILE__) + '/billomat/api-resources/users'
