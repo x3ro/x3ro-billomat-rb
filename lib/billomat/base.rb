@@ -4,7 +4,10 @@ module Billomat
 
   class Base < ActiveResource::Base
     class << self
-      ActiveSupport.dasherize_xml = false
+
+      # TODO: Add the dasherize_xml = false behaviour the Rails3 way
+      # http://stackoverflow.com/questions/5438361/use-underscores-instead-of-dashes-with-activeresource-xml-set-dasherize-to-fal
+      # ActiveSupport.dasherize_xml = false
       def inherited(base)
         unless base == Billomat::SingletonBase
           Billomat.resources << base
