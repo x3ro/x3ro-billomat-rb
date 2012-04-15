@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'rake/testtask'
 
 task :default => [:build]
 
@@ -43,3 +44,10 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+
+desc "Run tests"
+Rake::TestTask.new do |t|
+ t.libs << 'test'
+end
+
