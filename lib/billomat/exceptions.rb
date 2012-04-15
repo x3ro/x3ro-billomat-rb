@@ -1,1 +1,3 @@
-class MethodNotAvailable < StandardError; end
+module Billomat
+  class MethodNotAvailable < StandardError; end
+end
