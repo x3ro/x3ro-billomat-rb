@@ -1,0 +1,1 @@
+class MethodNotAvailable < StandardError; end

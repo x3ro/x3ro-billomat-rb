@@ -36,7 +36,7 @@ module Billomat
     # Sets the api key for all resource
     # Removes all earlier authentication info
     def key=(value)
-      resources.each do |klass|       
+      resources.each do |klass|
         klass.headers['X-BillomatApiKey'] = value
       end
       @key = value
@@ -67,136 +67,12 @@ module Billomat
   self.protocol      = 'http'
   self.port          = '80'
 
-  class MethodNotAvailable < StandardError; end
-
-  module ResourceWithoutWriteAccess
-    def save
-      raise MethodNotAvailable, "Cannot save #{self.class.name} over billomat api"
-    end
-
-    def create
-      raise MethodNotAvailable, "Cannot save #{self.class.name} over billomat api"
-    end
-
-    def destroy
-      raise MethodNotAvailable, "Cannot save #{self.class.name} over billomat api"
-    end
-  end
-
-  module ResourceWithoutId
-    def save
-    connection.put(element_path(prefix_options), encode, self.class.headers).tap do |response|
-      load_attributes_from_response(response)
-    end
-  end
-  end
-
-  # possibly ResourceWithActiveArchived
-
-  class Base < ActiveResource::Base
-    class << self
-      ActiveSupport.dasherize_xml = false
-      def inherited(base)
-        unless base == Billomat::SingletonBase
-          Billomat.resources << base
-          class << base
-            attr_accessor :site_format
-          end
-          base.site_format = '%s'
-          base.timeout = 20
-        end
-        super
-      end
-
-      def element_path(id, prefix_options = {}, query_options = nil)
-        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-        "#{prefix(prefix_options)}#{collection_name}/#{id}#{query_string(query_options)}"
-      end
-
-      def el_p(id,prefix_options = {}, query_options = nil)
-        element_path(id,prefix_options, query_options)
-      end
-
-      def coll_p(prefix_options = {}, query_options = nil)
-        collection_path(prefix_options, query_options)
-      end
-
-  
-
-      def collection_path(prefix_options = {}, query_options = nil)
-        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-        "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
-      end
-
-      # Some common shortcuts from ActiveRecord
-
-      def all(options={})
-        find(:all,options)
-      end
-
-      def first(options={})
-        find_every(options).first
-      end
-
-      def last(options={})
-        find_every(options).last
-      end
-    end
-
-    private
-
-    def query_string?(options)
-      options.is_a?(String) ? "#{options}" : super
-    end
-  end
-
-  class SingletonBase < Base
-
-    include ResourceWithoutId
-
-    class << self
-      def collection_name
-        element_name
-      end
-
-      def element_path(id,prefix_options = {}, query_options = nil)
-        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-        "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
-      end
-
-      def collection_path(prefix_options = {}, query_options = nil)
-        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-        "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
-      end
-    end
-
-    def find
-      # TODO: Fetch whether ids where given or not
-      # and get the wanted one in those cases
-      super(1)
-    end
-
-    def self.first
-      self.find
-    end
-
-    def self.last
-      self.find
-    end
-
-    alias_method :first, :find
-    alias_method :last, :find
-
-    # Prevent collection methods
-    def self.all
-      raise MethodNotAvailable, "Method not supported on #{self.class.name}"
-    end
-  end
-
-  class ReadOnlySingletonBase < SingletonBase
-    include ResourceWithoutWriteAccess
-  end
 end
+
+
+"""
+TODO: Understand this ActiveSupport monkey-patch and implement the same functionality
+for ActiveSupport 3.2.3
 
 module ActiveSupport #:nodoc:
   module CoreExtensions #:nodoc:
@@ -225,9 +101,14 @@ module ActiveSupport #:nodoc:
     end
   end
 end
+"""
 
-#$:.unshift(File.dirname(__FILE__))
-#Dir[File.join(File.dirname(__FILE__), "billomat/*.rb")].each { |f| require f }
+
+require File.dirname(__FILE__) + '/billomat/exceptions'
+require File.dirname(__FILE__) + '/billomat/base'
+require File.dirname(__FILE__) + '/billomat/singleton_base'
+require File.dirname(__FILE__) + '/billomat/read_only_singleton_base'
+require File.dirname(__FILE__) + '/billomat/resource_types'
 
 require File.dirname(__FILE__) + '/billomat/api-resources/settings'
 require File.dirname(__FILE__) + '/billomat/api-resources/users'
