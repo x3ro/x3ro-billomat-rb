@@ -1,3 +1,5 @@
-class ReadOnlySingletonBase < SingletonBase
-  include ResourceWithoutWriteAccess
+module Billomat
+  class ReadOnlySingletonBase < SingletonBase
+    include ResourceWithoutWriteAccess
+  end
 end
