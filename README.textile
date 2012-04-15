@@ -6,6 +6,15 @@ h2. Requirements
 
 billomat-rb requires active_resource and active_support in version 3.2.3 or above.
 
+h2. Simple usage example
+
+bc.. require 'billomat-rb'
+
+Billomat.account = "myapitest"
+Billomat.key = "<insert your api key here>"
+
+puts Billomat.validate # Should return true at this point
+
 h2. Note on Patches/Pull Requests
 * Fork the project.
 * Make your feature addition or bug fix.
