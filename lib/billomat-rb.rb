@@ -229,8 +229,8 @@ end
 #$:.unshift(File.dirname(__FILE__))
 #Dir[File.join(File.dirname(__FILE__), "billomat/*.rb")].each { |f| require f }
 
-require File.dirname(__FILE__) + '/billomat/settings'
-require File.dirname(__FILE__) + '/billomat/users'
-require File.dirname(__FILE__) + '/billomat/myself'
-require File.dirname(__FILE__) + '/billomat/clients'
-require File.dirname(__FILE__) + '/billomat/unit'
+require File.dirname(__FILE__) + '/billomat/api-resources/settings'
+require File.dirname(__FILE__) + '/billomat/api-resources/users'
+require File.dirname(__FILE__) + '/billomat/api-resources/myself'
+require File.dirname(__FILE__) + '/billomat/api-resources/clients'
+require File.dirname(__FILE__) + '/billomat/api-resources/unit'
