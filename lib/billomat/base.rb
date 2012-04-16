@@ -3,6 +3,11 @@
 module Billomat
 
   class Base < ActiveResource::Base
+
+    # Set format to XML because it is the format documented in the Billomat API docs.
+    # TODO: Implement possiblity to opt-in to use JSON format
+    self.format = :xml
+
     class << self
 
       # TODO: Add the dasherize_xml = false behaviour the Rails3 way
