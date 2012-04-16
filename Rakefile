@@ -48,6 +48,11 @@ end
 
 desc "Run tests"
 Rake::TestTask.new do |t|
- t.libs << 'test'
+  # Make sure API credentials for the unit tests are supplied
+  if ENV['ACC'].nil? or ENV['KEY'].nil?
+    abort("\n\n Please call using 'KEY={billomatApiKey} ACC={billomatAccount} rake test'\n\n") 
+  end
+
+  t.libs << 'test'
 end
 
