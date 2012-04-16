@@ -44,6 +44,23 @@ module Billomat
     def resources
       @resources ||= []
     end
+
+
+    # Resets the Billomat API to a "clean" state, that is, with no account or key
+    # assigned to it.
+    #
+    # * *Returns* :
+    #   - nil
+    #
+    def reset!
+      resources.each do |klass|
+        klass.site = nil
+        klass.headers.delete 'X-BillomatApiKey'
+      end
+      @account = nil
+      @key = nil
+    end
+
   end
 
   self.host_format   = '%s://%s%s%s' # protocol :// domain_format port path
