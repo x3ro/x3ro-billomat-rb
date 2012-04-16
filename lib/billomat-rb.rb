@@ -12,6 +12,8 @@ module Billomat
     attr_accessor :host_format, :domain_format, :protocol, :port, :api_path
     attr_reader :account, :key
 
+    attr_accessor :resources
+
     # Sets the account name and updates all resources with the new domain
     def account=(name)
       resources.each do |klass|
@@ -41,6 +43,12 @@ module Billomat
       !!Billomat::Myself.find
     end
 
+
+    # Reader for @resources, so that we can initialize it on first access
+    #
+    # * *Returns* :
+    #   - Array of currently loaded API resource classes
+    #
     def resources
       @resources ||= []
     end
