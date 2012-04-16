@@ -31,11 +31,6 @@ module Billomat
       @key = value
     end
 
-    # Validates connection
-    # returns true when valid false when not
-    def validate
-      validate! rescue false
-    end
 
     # Same as validate
     # but raises http-error when connection is invalid
