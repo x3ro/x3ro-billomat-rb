@@ -9,7 +9,7 @@ require 'active_resource'
 module Billomat
 
   class << self
-    attr_accessor :email, :password, :host_format, :domain_format, :protocol, :port, :api_path
+    attr_accessor :host_format, :domain_format, :protocol, :port, :api_path
     attr_reader :account, :key
 
     # Sets the account name and updates all resources with the new domain
@@ -20,19 +20,6 @@ module Billomat
       @account = name
     end
 
-    # Sets up basic authentication credentials for all resources.
-    # Removes all earlier authentication info
-    def authenticate (email,password)
-      resources.each do |klass|
-        klass.email = email
-        klass.password = password
-        klass.headers.delete 'X-BillomatApiKey'
-      end
-      @email = email
-      @password = password
-      @key = nil
-    end
-
     # Sets the api key for all resource
     # Removes all earlier authentication info
     def key=(value)
@@ -40,8 +27,6 @@ module Billomat
         klass.headers['X-BillomatApiKey'] = value
       end
       @key = value
-      @email = nil
-      @password = nil
     end
 
     # Validates connection
