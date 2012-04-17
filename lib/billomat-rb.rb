@@ -14,7 +14,6 @@ require 'active_resource'
 module Billomat
 
   class << self
-    attr_accessor :host_format, :domain_format, :protocol, :port, :api_path
     attr_writer :resources
 
     # Contains an array of loaded resource classes (sub-classes of
@@ -36,7 +35,7 @@ module Billomat
     # See `attr_reader :account`
     def account=(name)
       resources.each do |klass|
-        klass.site = klass.site_format % (host_format % [protocol, domain_format % name, ":#{port}", api_path])
+        klass.site = @host_format % [@protocol, @domain_format % name, ":#{@port}", @api_path]
       end
       @account = name
     end
@@ -82,11 +81,11 @@ module Billomat
 
   end
 
-  self.host_format   = '%s://%s%s%s' # protocol :// domain_format port path
-  self.domain_format = '%s.billomat.net'
-  self.api_path      = '/api'
-  self.protocol      = 'http'
-  self.port          = '80'
+  @host_format   = '%s://%s%s%s' # protocol :// domain_format port path
+  @domain_format = '%s.billomat.net'
+  @api_path      = '/api'
+  @protocol      = 'http'
+  @port          = '80'
 
 end
 
