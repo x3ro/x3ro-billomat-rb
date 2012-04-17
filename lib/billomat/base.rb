@@ -21,19 +21,11 @@ module Billomat
         super
       end
 
+
       def element_path(id, prefix_options = {}, query_options = nil)
         prefix_options, query_options = split_options(prefix_options) if query_options.nil?
         "#{prefix(prefix_options)}#{collection_name}/#{id}#{query_string(query_options)}"
       end
-
-      def el_p(id,prefix_options = {}, query_options = nil)
-        element_path(id,prefix_options, query_options)
-      end
-
-      def coll_p(prefix_options = {}, query_options = nil)
-        collection_path(prefix_options, query_options)
-      end
-
 
 
       # Overrides the [ActiveResource method](http://api.rubyonrails.org/classes/ActiveResource/Base.html#method-c-collection_path)
