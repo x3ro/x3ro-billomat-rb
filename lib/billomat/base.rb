@@ -45,19 +45,6 @@ module Billomat
         "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
       end
 
-      # Some common shortcuts from ActiveRecord
-
-      def all(options={})
-        find(:all,options)
-      end
-
-      def first(options={})
-        find_every(options).first
-      end
-
-      def last(options={})
-        find_every(options).last
-      end
     end
 
     private
