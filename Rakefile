@@ -43,16 +43,15 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "billomat-rb #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+
+  #rdoc.options << '-f' << 'horo'
+  rdoc.options << '--fmt' << 'shtml' # explictly set shtml generator
+  rdoc.template = 'direct'
 end
 
 
 desc "Run tests"
 Rake::TestTask.new do |t|
-  # Make sure API credentials for the unit tests are supplied
-  if ENV['ACC'].nil? or ENV['KEY'].nil?
-    abort("\n\n Please call using 'KEY={billomatApiKey} ACC={billomatAccount} rake test'\n\n") 
-  end
-
   t.libs << 'test'
 end
 
