@@ -16,10 +16,6 @@ module Billomat
       def inherited(base)
         unless base == Billomat::SingletonBase
           Billomat.resources << base
-          class << base
-            attr_accessor :site_format
-          end
-          base.site_format = '%s'
           base.timeout = 20
         end
         super
