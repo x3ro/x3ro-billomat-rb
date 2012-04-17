@@ -6,21 +6,47 @@ require 'active_resource'
 
 # A neat ruby library for interacting with the RESTfull API of billomat
 
+
+# A Ruby library for interacting with the RESTful Billomat API
+#
+# * TODO: Add usage examples
+#
 module Billomat
 
   class << self
     attr_accessor :host_format, :domain_format, :protocol, :port, :api_path
-    attr_reader :account, :key
+    attr_writer :resources
 
-    attr_accessor :resources
+    # Contains an array of loaded resource classes (sub-classes of
+    # ActiveResource::Base) that implement Billomat API methods. Shouldn't be
+    # accessed directly as it is only necessary for internal use.
+    # @return [Array]
+    #
+    def resources
+      @resources ||= []
+    end
 
-    # Sets the account name and updates all resources with the new domain
+
+    # Updating the Billomat account name updates all loaded resources with the
+    # respective new API URL (there is a API subdomain for every account
+    # ([read more](http://www.billomat.com/en/api/basics/)).
+    #
+    attr_reader :account
+
+    # See `attr_reader :account`
     def account=(name)
       resources.each do |klass|
         klass.site = klass.site_format % (host_format % [protocol, domain_format % name, ":#{port}", api_path])
       end
       @account = name
     end
+
+
+    # Holds the API authentication key. Updating this attribute will remove previously
+    # set authentication information.
+    # @return [String]
+    #
+    attr_reader :key
 
     # Sets the api key for all resource
     # Removes all earlier authentication info
@@ -32,28 +58,18 @@ module Billomat
     end
 
 
-    # Same as validate
-    # but raises http-error when connection is invalid
+    # Tries to connect to the Billomat API
+    # @return [bool] True if the connection attempt was successful, otherwise false
+    # @raise [Exception] May raise an exception if an error occurred
     def validate!
       !!Billomat::Myself.find
-    end
-
-
-    # Reader for @resources, so that we can initialize it on first access
-    #
-    # * *Returns* :
-    #   - Array of currently loaded API resource classes
-    #
-    def resources
-      @resources ||= []
     end
 
 
     # Resets the Billomat API to a "clean" state, that is, with no account or key
     # assigned to it.
     #
-    # * *Returns* :
-    #   - nil
+    # @return [void]
     #
     def reset!
       resources.each do |klass|
