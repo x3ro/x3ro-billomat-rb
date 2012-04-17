@@ -13,6 +13,10 @@ module Billomat
       # TODO: Add the dasherize_xml = false behaviour the Rails3 way
       # http://stackoverflow.com/questions/5438361/use-underscores-instead-of-dashes-with-activeresource-xml-set-dasherize-to-fal
       # ActiveSupport.dasherize_xml = false
+
+
+      # By overwriting `#interited()` we make sure that every resource class is automatically
+      # added to the `resources` array in `Billomat`.
       def inherited(base)
         unless base == Billomat::SingletonBase
           Billomat.resources << base
