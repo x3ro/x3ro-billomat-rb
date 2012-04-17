@@ -4,6 +4,11 @@ require 'billomat-rb'
 class BillomatTest < Test::Unit::TestCase
 
   def setup
+    # Make sure API credentials for the unit tests are supplied
+    if ENV['ACC'].nil? or ENV['KEY'].nil?
+      abort("\n\n Please call using 'KEY={billomatApiKey} ACC={billomatAccount} rake test'\n\n")
+    end
+
     # The API Key and the account used when running the unit tests has to be passed
     # using environment variables as Rake apparently does not support passing parameters
     # to the test-task, and I don't want API credentials to end up in this test file
