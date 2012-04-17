@@ -26,19 +26,25 @@ module Billomat
       end
 
 
-      def element_path(id, prefix_options = {}, query_options = nil)
-        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-        "#{prefix(prefix_options)}#{collection_name}/#{id}#{query_string(query_options)}"
-      end
-
-
       # Overrides the [ActiveResource method](http://api.rubyonrails.org/classes/ActiveResource/Base.html#method-c-collection_path)
       # in order to strip the type extension from the collection path, e.g. `/api/clients`
       # instead of `/api/clients.xml`, as the Billomat API does not support the latter.
+      #
       def collection_path(prefix_options = {}, query_options = nil)
         check_prefix_options(prefix_options)
         prefix_options, query_options = split_options(prefix_options) if query_options.nil?
         "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
+      end
+
+
+      # We need to strip the format extension, same as in Base#collection_path
+      # @see Base#collection_path
+      #
+      def element_path(id, prefix_options = {}, query_options = nil)
+        check_prefix_options(prefix_options)
+
+        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
+        "#{prefix(prefix_options)}#{collection_name}/#{URI.parser.escape id.to_s}#{query_string(query_options)}"
       end
 
     end
