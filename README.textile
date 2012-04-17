@@ -15,6 +15,12 @@ Billomat.key = "<insert your api key here>"
 
 puts Billomat.validate # Should return true at this point
 
+h2. Notes
+
+Documentation is generated using
+
+bc. sdoc -T rails .
+
 h2. Note on Patches/Pull Requests
 * Fork the project.
 * Make your feature addition or bug fix.
