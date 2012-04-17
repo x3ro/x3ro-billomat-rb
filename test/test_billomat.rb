@@ -46,5 +46,17 @@ class BillomatTest < Test::Unit::TestCase
     assert_equal @apiKey, Billomat.key
   end
 
+
+  def test_read_client_resource
+    x = Billomat::Client.find(:all)
+    assert x.is_a? Array
+  end
+
+
+  def test_read_setting_resource
+    x = Billomat::Settings.find
+    assert x.is_a? Billomat::Settings
+  end
+
 end
 
