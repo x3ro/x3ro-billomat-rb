@@ -36,7 +36,11 @@ module Billomat
 
 
 
+      # Overrides the [ActiveResource method](http://api.rubyonrails.org/classes/ActiveResource/Base.html#method-c-collection_path)
+      # in order to strip the type extension from the collection path, e.g. `/api/clients`
+      # instead of `/api/clients.xml`, as the Billomat API does not support the latter.
       def collection_path(prefix_options = {}, query_options = nil)
+        check_prefix_options(prefix_options)
         prefix_options, query_options = split_options(prefix_options) if query_options.nil?
         "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
       end
