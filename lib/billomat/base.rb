@@ -47,11 +47,6 @@ module Billomat
 
     end
 
-    private
-
-    def query_string?(options)
-      options.is_a?(String) ? "#{options}" : super
-    end
   end
 
 end
