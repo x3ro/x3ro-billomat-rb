@@ -1,15 +1,12 @@
 require 'rubygems'
 require 'rake'
 require 'rake/testtask'
+require 'yard'
 
 task :default => [:build]
 
 $gem_name = "billomat-rb"
  
-#desc "Run specs"
-#task :spec do
-#  sh "spec spec/* --format specdoc --color"
-#end
 
 begin
   require 'jeweler'
@@ -31,27 +28,12 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
 
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION')
-    version = File.read('VERSION')
-  else
-    version = ""
-  end
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "billomat-rb #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-
-  #rdoc.options << '-f' << 'horo'
-  rdoc.options << '--fmt' << 'shtml' # explictly set shtml generator
-  rdoc.template = 'direct'
-end
-
 
 desc "Run tests"
 Rake::TestTask.new do |t|
   t.libs << 'test'
 end
 
+
+YARD::Rake::YardocTask.new do |t|
+end
