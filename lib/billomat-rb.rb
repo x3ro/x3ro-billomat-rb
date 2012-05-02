@@ -4,13 +4,44 @@ gem 'activesupport', '>=3.2.3'
 require 'active_support'
 require 'active_resource'
 
-# A neat ruby library for interacting with the RESTfull API of billomat
+=begin
+A Ruby library for interacting with the RESTful Billomat API
+
+# Initializing
+
+To initialize the Billomat API, you need your account name and an API key. Information
+on how this key can be obtain can be found [here](http://www.billomat.com/en/api/basics/),
+in the **Authentication** section.
+
+    require 'billomat-rb'
+
+    Billomat.account = "<insert your account name here>"
+    Billomat.key = "<insert your api key here>"
+
+    puts Billomat.validate! # Should return true at this point
+
+# Resources
+
+All the following examples assume you have initialized the API properly.
+
+## Settings
+
+The Billomat API currently only supports retrieving all settings at once:
+
+    Billomat.res(:settings).find
+
+will yield
+
+    => #<Billomat::Resources::Settings:0x007fc850b1e138 @attributes={...} prefix_options={}, @persisted=true>
+
+Modifying settings is also supported:
+
+    x = Billomat.res(:settings).find
+    x.currency_code = "USD"
+    x.save # => true
 
 
-# A Ruby library for interacting with the RESTful Billomat API
-#
-# * TODO: Add usage examples
-#
+=end
 module Billomat
 
   class << self

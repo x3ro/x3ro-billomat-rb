@@ -8,14 +8,9 @@ A neat ruby library for interacting with the [RESTful API](http://www.billomat.c
 billomat-rb requires `active_resource` and `active_support` in version 3.2.3 or above.
 
 
-# Simple usage example
+# Examples
 
-    require 'billomat-rb'
-    
-    Billomat.account = "myapitest"
-    Billomat.key = "<insert your api key here>"
-
-    puts Billomat.validate! # Should return true at this point
+    TODO: Add link to usage examples (they will be located in the main module's comments)
 
 
 # Notes
