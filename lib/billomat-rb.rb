@@ -20,6 +20,21 @@ in the **Authentication** section.
 
     puts Billomat.validate! # Should return true at this point
 
+# Note on IDs
+
+The record IDs retrieving from the Billomat API are globally unique identifiers,
+that is, they do not start at `1` for your account. Therefore, **the following will
+probably fail** for you:
+
+    Billomat.res(:client).find(1)
+
+
+# This is NOT an API documentation!
+
+If you don't know the API itself, please take a look at
+[the official API docs](http://www.billomat.com/en/api/), I'm just trying to give
+you a few examples on how to use this gem :)
+
 # Resources
 
 All the following examples assume you have initialized the API properly.
@@ -40,6 +55,20 @@ Modifying settings is also supported:
     x.currency_code = "USD"
     x.save # => true
 
+
+## Clients
+
+Retrieving all clients:
+
+    Billomat.res(:client).all
+
+Retrieving a client with a known id (see the note on IDs):
+
+    Billomat.res(:client).find(123456)
+
+Searching for a client with a certain name:
+
+    Billomat.res(:client).find(:all, :params => { :name => "google" })
 
 =end
 module Billomat
