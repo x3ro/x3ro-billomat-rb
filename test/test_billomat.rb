@@ -1,6 +1,12 @@
 require 'test/unit'
 require 'billomat-rb'
 
+
+puts "!!! Running these tests will MODIFY the account settings of the given account !!!"
+puts "Do you want to continue? (yes/no)"
+abort("Bye!") if $stdin.gets != "yes\n"
+
+
 class BillomatTest < Test::Unit::TestCase
 
   def setup
@@ -19,6 +25,7 @@ class BillomatTest < Test::Unit::TestCase
     Billomat.account = @account
     Billomat.key = @apiKey
   end
+
 
   def teardown
     Billomat.reset!
