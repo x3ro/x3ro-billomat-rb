@@ -65,6 +65,16 @@ class BillomatTest < Test::Unit::TestCase
     assert x.is_a? Billomat.res(:settings)
   end
 
+  def test_write_setting_resource
+    x = Billomat.res(:settings).find
+    old = x.offer_number_length
+    x.offer_number_length += 1
+    x.save
+
+    y = Billomat.res(:settings).find
+    assert_equal old+1, y.offer_number_length
+  end
+
 
   def test_api_resource_getter
     Billomat::Resources.constants.each do |klass|
