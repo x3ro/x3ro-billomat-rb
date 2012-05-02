@@ -1,4 +1,4 @@
-module Billomat
+module Billomat::Resources
 
   # Class representing a {setting}[http://www.billomat.com/en/api/settings/].
   # As the Billomat API only supports retrieving all settings at once, the only method
@@ -10,7 +10,7 @@ module Billomat
   #     x = Billomat::Settings.find
   #     x.currency_code # => "EUR"
   #
-  class Settings < Base
+  class Settings < Billomat::Base
 
     self.schema do
       string :invoice_intro
@@ -37,6 +37,12 @@ module Billomat
       integer :discount_days
       integer :due_days
       integer :offer_validity_days
+    end
+
+
+    def self.find(*args)
+      raise ArgumentError.new("Settings#find does not support any options") if args.length > 0
+      find_single(nil, {})
     end
 
   end
