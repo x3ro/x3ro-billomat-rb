@@ -60,6 +60,46 @@ class BillomatTest < Test::Unit::TestCase
   end
 
 
+  def test_read_client_resource_myself
+    x = Billomat.res(:client).myself
+    assert x.is_a?(Billomat::Resources::Client), "Could not retrieve own user account"
+    assert x.id > 0, "Could not retrieve own user account"
+  end
+
+
+  def test_save_client_resource_myself
+    x = Billomat.res(:client).myself
+    assert x.isMyselfRecord?, "Marking MyselfRecord did not succeed"
+
+    assert_raise NoMethodError do
+      x.save
+    end
+
+    assert_raise NoMethodError do
+      x.destroy
+    end
+  end
+
+
+=begin
+  TODO: Re-enable and fix problems when creating a new client
+  See https://groups.google.com/forum/?fromgroups#!topic/billomatapi/mAJCQfdPbno
+  def test_create_client_resource
+    x = Billomat.res(:client).new
+    assert x.save, "Could not save newly created client"
+    assert x.save, "Client creation resulted in invalid client record"
+    assert(x.id > 0, "New client was not successfully created (no id)")
+
+    y = Billomat.res(:client).find(x.id)
+    y.email = "foo@bar.de"
+    assert y.save, "Editing client resource did not succeed"
+
+    z = Billomat.res(:client).find(x.id)
+    assert_equal "foo@bar.de", z.email
+  end
+=end
+
+
   def test_read_setting_resource
     x = Billomat.res(:settings).find
     assert x.is_a? Billomat.res(:settings)
