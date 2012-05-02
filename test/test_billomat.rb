@@ -48,14 +48,21 @@ class BillomatTest < Test::Unit::TestCase
 
 
   def test_read_client_resource
-    x = Billomat::Client.find(:all)
+    x = Billomat.res(:client).find(:all)
     assert x.is_a? Array
   end
 
 
   def test_read_setting_resource
-    x = Billomat::Settings.find
-    assert x.is_a? Billomat::Settings
+    x = Billomat.res(:settings).find
+    assert x.is_a? Billomat.res(:settings)
+  end
+
+
+  def test_api_resource_getter
+    Billomat::Resources.constants.each do |klass|
+      assert_equal(Billomat::Resources.const_get(klass), Billomat.res(klass), "Billomat#res seems to be broken")
+    end
   end
 
 end
