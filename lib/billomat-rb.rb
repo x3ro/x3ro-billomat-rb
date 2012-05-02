@@ -79,6 +79,24 @@ module Billomat
       @key = nil
     end
 
+
+    # Fetches an available API resource class, previously checking if the Billomat class
+    # has been initialized and is ready to be used (because if uninitialized, API calls
+    # result in difficult-to-debug error messages. Therefore it is recommended to use this
+    # method instead of accessing the resources directly).
+    #
+    # @return [Billomat::Base]
+    #
+    def res(resource)
+      raise NotInitializedError.new("Billomat account or key was not set!") if @account.nil? or @key.nil?
+
+      resource = resource.to_s.capitalize.to_sym
+      raise ArgumentError.new("Unknown resource type '#{resource}'") if not Billomat::Resources.constants.include? resource
+
+      Billomat::Resources.const_get(resource)
+    end
+
+
   end
 
   @host_format   = '%s://%s%s%s' # protocol :// domain_format port path
