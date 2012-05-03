@@ -81,9 +81,6 @@ class BillomatTest < Test::Unit::TestCase
   end
 
 
-=begin
-  TODO: Re-enable and fix problems when creating a new client
-  See https://groups.google.com/forum/?fromgroups#!topic/billomatapi/mAJCQfdPbno
   def test_create_client_resource
     x = Billomat.res(:client).new
     assert x.save, "Could not save newly created client"
@@ -97,13 +94,13 @@ class BillomatTest < Test::Unit::TestCase
     z = Billomat.res(:client).find(x.id)
     assert_equal "foo@bar.de", z.email
   end
-=end
 
 
   def test_read_setting_resource
     x = Billomat.res(:settings).find
     assert x.is_a? Billomat.res(:settings)
   end
+
 
   def test_write_setting_resource
     x = Billomat.res(:settings).find
