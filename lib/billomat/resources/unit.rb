@@ -1,8 +1,7 @@
 module Billomat::Resources
 
-  class Units < Billomat::SingletonBase
-  end
-
+  # Implements [Billomat Articles](http://www.billomat.com/en/api/units/)
+  #
   class Unit < Billomat::Base
   end
 
