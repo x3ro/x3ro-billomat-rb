@@ -162,5 +162,10 @@ class BillomatTest < Test::Unit::TestCase
 
   default_resource_test :article, :description, "test1234"
 
+
+  # Test unit resource
+
+  default_resource_test :unit, :name, "foobar"
+
 end
 
