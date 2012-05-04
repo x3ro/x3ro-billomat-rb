@@ -3,6 +3,7 @@ gem 'activeresource', '>=3.2.3'
 gem 'activesupport', '>=3.2.3'
 require 'active_support'
 require 'active_resource'
+require 'active_resource/exceptions'
 
 =begin
 A Ruby library for interacting with the RESTful Billomat API

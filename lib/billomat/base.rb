@@ -49,6 +49,22 @@ module Billomat
 
     end
 
+
+    def create(*args)
+      begin
+        super *args
+      rescue ActiveResource::ForbiddenAccess => error
+        # Check if we got a "Forbidden" because of exceeded plan quota, and throw a more
+        # useful exception if that is the case
+        #
+        if not (error.response.body =~ /insufficient capacity/i).nil?
+          raise Billomat::QuotaExceededError.new(error.response, error.message)
+        else
+          raise error
+        end
+      end
+    end
+
   end
 
 end
