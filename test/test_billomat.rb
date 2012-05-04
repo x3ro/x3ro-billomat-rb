@@ -114,10 +114,7 @@ class BillomatTest < Test::Unit::TestCase
 
   # Test client resource
 
-  def test_read_client_resource
-    x = Billomat.res(:client).find(:all)
-    assert x.is_a? Array
-  end
+  default_resource_test :client, :email, "foo@bar.de"
 
 
   def test_read_client_resource_myself
@@ -139,22 +136,6 @@ class BillomatTest < Test::Unit::TestCase
       x.destroy
     end
   end
-
-
-  def test_create_client_resource
-    x = Billomat.res(:client).new
-    assert x.save, "Could not save newly created client"
-    assert x.save, "Client creation resulted in invalid client record"
-    assert(x.id > 0, "New client was not successfully created (no id)")
-
-    y = Billomat.res(:client).find(x.id)
-    y.email = "foo@bar.de"
-    assert y.save, "Editing client resource did not succeed"
-
-    z = Billomat.res(:client).find(x.id)
-    assert_equal "foo@bar.de", z.email
-  end
-
 
 
   # Test settings resource
