@@ -1,5 +1,8 @@
 module Billomat::Resources
 
+
+  # Implements [Billomat Clients](http://www.billomat.com/en/api/clients/)
+  #
   class Client < Billomat::Base
 
     include Billomat::ResourceWithMyselfRecord
