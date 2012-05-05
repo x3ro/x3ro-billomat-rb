@@ -57,6 +57,7 @@ All the following examples assume you have initialized the API properly.
 The following resources **do not** work this way, and have separate usage examples:
 
 * Settings
+* Invoices (only because of mandatory field `client_id`)
 
 Every other resource provided by this API can be accessed using the techniques depicted
 in the following examples.
@@ -91,6 +92,15 @@ Modifying settings is also supported:
     x.save # => true
 
 
+## Resource: Invoices
+
+An invoice needs to have the `client_id` field set, e.g.
+
+    client = Billomat.res(:client).first
+
+    invoice = Billomat.res(:invoice).new
+    invoice.client_id = client.id
+    invoice.save
 
 =end
 module Billomat
