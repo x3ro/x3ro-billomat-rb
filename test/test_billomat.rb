@@ -186,5 +186,51 @@ class BillomatTest < Test::Unit::TestCase
 
   default_resource_test :unit, :name, "foobar"
 
+
+=begin
+Invoice test currently disabled because of a bug in the API
+TODO: Re-enable when https://groups.google.com/forum/#!msg/billomatapi/1sjN3kP45u8/FL4VzCV_qj4J
+is fixed.
+
+  # Test invoice resource
+
+  default_resource_test :invoice, :label, "a nice label"
+
+  # We need to overwrite the default create test because an invoice needs a client id
+  # as a mandatory parameter
+  def test_create_invoice_resource
+    resource = :invoice
+    test_field = :label
+    test_value = "a nice label"
+
+
+    # We need a client so that we can assign a valid client id to the invoice
+    Billomat.res(:client).last.destroy
+    clients = Billomat.res(:client).all
+    client = nil
+    if clients.length < 1
+      client = Billomat.res(:client).new
+      client.save
+    else
+      client = clients.first
+    end
+
+
+    x = Billomat.res(resource).new
+    x.client_id = client.id
+    assert x.save, "Could not save newly created #{resource}"
+    assert x.save, "#{resource} creation resulted in invalid #{resource} record"
+    assert(x.id > 0, "New #{resource} was not successfully created (no id)")
+
+
+    y = Billomat.res(resource).find(x.id)
+    y.attributes[test_field] = test_value
+    assert y.save, "Editing #{resource} resource did not succeed"
+
+    z = Billomat.res(resource).find(x.id)
+    assert_equal test_value, z.attributes[test_field]
+  end
+=end
+
 end
 
