@@ -20,13 +20,18 @@ class BillomatTest < Test::Unit::TestCase
     # Default test for reading a resource
     define_method "test_read_#{resource}_resource".to_sym do
       x = Billomat.res(resource).find(:all)
-      assert x.is_a? Array
+      assert x.is_a?(Array), "find(:all) seems to have failed, result is not an array"
+
+      # We can only test first/last if there actually is an element
+      if x.length < 1
+        return
+      end
 
       x = Billomat.res(resource).first
-      assert x.is_a? Billomat.res(resource)
+      assert x.is_a?(Billomat.res(resource)), "find(:first) seems to have failed, result is not a #{resource}"
 
       x = Billomat.res(resource).last
-      assert x.is_a? Billomat.res(resource)
+      assert x.is_a?(Billomat.res(resource)), "find(:last) seems to have failed, result is not a #{resource}"
     end
 
     # Default test for creating a resource
@@ -42,6 +47,19 @@ class BillomatTest < Test::Unit::TestCase
 
       z = Billomat.res(resource).find(x.id)
       assert_equal test_value, z.attributes[test_field]
+    end
+
+    # Default test for deleting a resource
+    define_method "test_delete_#{resource}_resource".to_sym do
+      x = Billomat.res(resource).last
+      id = x.id
+
+      x.destroy
+
+      assert_raise ActiveResource::ResourceNotFound do
+        Billomat.res(resource).find(id)
+      end
+
     end
   end
 
