@@ -23,6 +23,13 @@ in the **Authentication** section.
 
 
 
+# Caveats
+
+* `Billomat.res(:some_resource).delete(record_id)` is currently broken because of a
+    [a bug in ActiveResource](https://github.com/rails/activeresource/issues/26). Use
+    `destroy` on the record instance instead.
+
+
 # Note on IDs
 
 The record IDs retrieving from the Billomat API are globally unique identifiers,
