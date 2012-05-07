@@ -187,10 +187,6 @@ class BillomatTest < Test::Unit::TestCase
   default_resource_test :unit, :name, "foobar"
 
 
-=begin
-Invoice test currently disabled because of a bug in the API
-TODO: Re-enable when https://groups.google.com/forum/#!msg/billomatapi/1sjN3kP45u8/FL4VzCV_qj4J
-is fixed.
 
   # Test invoice resource
 
@@ -230,7 +226,6 @@ is fixed.
     z = Billomat.res(resource).find(x.id)
     assert_equal test_value, z.attributes[test_field]
   end
-=end
 
 end
 
