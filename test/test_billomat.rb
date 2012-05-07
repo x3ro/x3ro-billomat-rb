@@ -21,17 +21,6 @@ class BillomatTest < Test::Unit::TestCase
     define_method "test_read_#{resource}_resource".to_sym do
       x = Billomat.res(resource).find(:all)
       assert x.is_a?(Array), "find(:all) seems to have failed, result is not an array"
-
-      # We can only test first/last if there actually is an element
-      if x.length < 1
-        return
-      end
-
-      x = Billomat.res(resource).first
-      assert x.is_a?(Billomat.res(resource)), "find(:first) seems to have failed, result is not a #{resource}"
-
-      x = Billomat.res(resource).last
-      assert x.is_a?(Billomat.res(resource)), "find(:last) seems to have failed, result is not a #{resource}"
     end
 
     # Default test for creating a resource
