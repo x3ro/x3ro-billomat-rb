@@ -36,20 +36,14 @@ class BillomatTest < Test::Unit::TestCase
 
       z = Billomat.res(resource).find(x.id)
       assert_equal test_value, z.attributes[test_field]
-    end
 
-    # Default test for deleting a resource
-    define_method "test_delete_#{resource}_resource".to_sym do
-      x = Billomat.res(resource).last
-      id = x.id
-
+      # Test resource deletion
       x.destroy
-
       assert_raise ActiveResource::ResourceNotFound do
-        Billomat.res(resource).find(id)
+        Billomat.res(resource).find(x.id)
       end
-
     end
+
   end
 
 
