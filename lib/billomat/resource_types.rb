@@ -1,15 +1,15 @@
 module Billomat
   module ResourceWithoutWriteAccess
     def save
-      raise MethodNotAvailable, "Cannot save #{self.class.name} over billomat api"
+      raise NoMethodError, "Cannot save read-only resource #{self.class.name} over billomat api"
     end
 
     def create
-      raise MethodNotAvailable, "Cannot save #{self.class.name} over billomat api"
+      raise NoMethodError, "Cannot save read-only resource #{self.class.name} over billomat api"
     end
 
     def destroy
-      raise MethodNotAvailable, "Cannot save #{self.class.name} over billomat api"
+      raise NoMethodError, "Cannot save read-only resource #{self.class.name} over billomat api"
     end
   end
 
