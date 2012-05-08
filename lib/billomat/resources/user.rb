@@ -1,6 +1,6 @@
 module Billomat::Resources
 
-  class Users < Billomat::Base
+  class User < Billomat::Base
     include Billomat::ResourceWithoutWriteAccess
   end
 

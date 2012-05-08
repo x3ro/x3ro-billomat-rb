@@ -241,7 +241,7 @@ require File.dirname(__FILE__) + '/billomat/singleton_base'
 require File.dirname(__FILE__) + '/billomat/read_only_singleton_base'
 
 require File.dirname(__FILE__) + '/billomat/resources/settings'
-require File.dirname(__FILE__) + '/billomat/resources/users'
+require File.dirname(__FILE__) + '/billomat/resources/user'
 require File.dirname(__FILE__) + '/billomat/resources/myself'
 require File.dirname(__FILE__) + '/billomat/resources/clients'
 require File.dirname(__FILE__) + '/billomat/resources/unit'
