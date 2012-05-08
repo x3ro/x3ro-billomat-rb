@@ -224,5 +224,32 @@ class BillomatTest < Test::Unit::TestCase
     Billomat.res(:client).find(client_id).destroy
   end
 
+
+
+  # Test user resource
+
+  def test_read_user_resource
+    x = Billomat.res(:user).find(:all)
+    assert x.is_a?(Array), "find(:all) seems to have failed, result is not an array"
+  end
+
+  def test_user_resource_readonly
+    user = Billomat.res(:user).first
+
+    assert_raise NoMethodError do
+      Billomat.res(:user).new.save
+    end
+
+    assert_raise NoMethodError do
+      user.email = "foo@bar.de"
+      user.save
+    end
+
+    assert_raise NoMethodError do
+      user.destroy
+    end
+  end
+
+
 end
 
