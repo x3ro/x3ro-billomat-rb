@@ -1,7 +1,8 @@
-# billomat-rb
+# x3ro-billomat-rb
 
-A neat ruby library for interacting with the [RESTful API](http://www.billomat.com/api/) of [Billomat](http://www.billomat.com/)
+A neat ruby library for interacting with the [RESTful API](http://www.billomat.com/api/) of [Billomat](http://www.billomat.com/). Forked from [here](https://github.com/rbecher/billomat-rb).
 
+<h1>Work in progress - Not all functionality availabe in the API is accessible yet</h1>
 
 # Requirements
 
