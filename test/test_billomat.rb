@@ -251,5 +251,61 @@ class BillomatTest < Test::Unit::TestCase
   end
 
 
+
+  # Test offer resource
+
+  default_resource_test :offer, :label, "a nice label"
+
+  # We need to overwrite the default create test because an offer needs a client id
+  # as a mandatory parameter
+  #
+  def test_create_offer_resource
+    resource = :offer
+    test_field = :label
+    test_value = "a nice label"
+
+    # We need a client so that we can assign a valid client id to the offer
+    # It is deleted in test_delete_invoice_resource
+    client = Billomat.res(:client).new
+    client.save
+
+    x = Billomat.res(resource).new
+    x.client_id = client.id
+    assert x.save, "Could not save newly created #{resource}"
+    assert x.save, "#{resource} creation resulted in invalid #{resource} record"
+    assert(x.id > 0, "New #{resource} was not successfully created (no id)")
+
+
+    y = Billomat.res(resource).find(x.id)
+    y.attributes[test_field] = test_value
+    assert y.save, "Editing #{resource} resource did not succeed"
+
+    z = Billomat.res(resource).find(x.id)
+    assert_equal test_value, z.attributes[test_field]
+  end
+
+  # We need to overwrite the default test here was well, because the client created
+  # in `test_create_offer_resource` needs to be cleaned up.
+  #
+  def test_delete_invoice_resource
+    resource = :offer
+
+    x = Billomat.res(resource).last
+    id = x.id
+
+    client_id = x.client_id
+
+    x.destroy
+
+    assert_raise ActiveResource::ResourceNotFound do
+      Billomat.res(resource).find(id)
+    end
+
+    # Clean up the client created in test_create_invoice_resource
+    Billomat.res(:client).find(client_id).destroy
+  end
+
+
+
 end
 

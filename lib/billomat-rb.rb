@@ -29,6 +29,10 @@ in the **Authentication** section.
     [a bug in ActiveResource](https://github.com/rails/activeresource/issues/26). Use
     `destroy` on the record instance instead.
 
+* The API naming differs on [estimates vs. offers](http://www.billomat.com/en/api/estimates/).
+  I decided to use `Offer` as the resource name for what is documented as `Estimate` in
+  the API docs, because it is actually being accessed as `/api/offers`.
+
 
 # Note on IDs
 
@@ -247,3 +251,4 @@ require File.dirname(__FILE__) + '/billomat/resources/client'
 require File.dirname(__FILE__) + '/billomat/resources/unit'
 require File.dirname(__FILE__) + '/billomat/resources/article'
 require File.dirname(__FILE__) + '/billomat/resources/invoice'
+require File.dirname(__FILE__) + '/billomat/resources/offer'
