@@ -8,6 +8,8 @@ require 'active_resource/exceptions'
 =begin
 A Ruby library for interacting with the RESTful Billomat API
 
+
+
 # Initializing
 
 To initialize the Billomat API, you need your account name and an API key. Information
@@ -34,6 +36,7 @@ in the **Authentication** section.
   the API docs, because it is actually being accessed as `/api/offers`.
 
 
+
 # Note on IDs
 
 The record IDs retrieving from the Billomat API are globally unique identifiers,
@@ -41,6 +44,7 @@ that is, they do not start at `1` for your account. Therefore, **the following w
 probably fail** for you:
 
     Billomat.res(:client).find(1)
+
 
 
 # This is NOT an API documentation!
