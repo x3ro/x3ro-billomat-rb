@@ -110,7 +110,8 @@ class BillomatTest < Test::Unit::TestCase
 
   def test_api_resource_getter
     Billomat::Resources.constants.each do |klass|
-      assert_equal(Billomat::Resources.const_get(klass), Billomat.res(klass), "Billomat#res seems to be broken")
+      resource = klass.to_s.scan(/[A-Z][^A-Z]*/).map { |x| x.downcase }.join('_').to_sym
+      assert_equal(Billomat::Resources.const_get(klass), Billomat.res(resource), "Billomat#res seems to be broken")
     end
   end
 
