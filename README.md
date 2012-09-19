@@ -36,4 +36,8 @@ Documentation is generated using
 
 # Copyright
 
-Copyright (c) 2010 Ronald Becher. See LICENSE for details.
+>Copyright (C) 2012 Lucas Jenss
+>
+>Original billomat-rb release Copyright (c) 2010 Ronald Becher.
+>
+>See LICENSE for details.
