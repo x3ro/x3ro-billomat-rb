@@ -154,7 +154,7 @@ module Billomat
     # @return [bool] True if the connection attempt was successful, otherwise false
     # @raise [Exception] May raise an exception if an error occurred
     def validate!
-      !!Billomat.res(:myself).find
+      !!Billomat.res(:user).myself
     end
 
 
@@ -243,7 +243,6 @@ require File.dirname(__FILE__) + '/billomat/read_only_singleton_base'
 
 require File.dirname(__FILE__) + '/billomat/resources/settings'
 require File.dirname(__FILE__) + '/billomat/resources/user'
-require File.dirname(__FILE__) + '/billomat/resources/myself'
 require File.dirname(__FILE__) + '/billomat/resources/client'
 require File.dirname(__FILE__) + '/billomat/resources/unit'
 require File.dirname(__FILE__) + '/billomat/resources/article'
