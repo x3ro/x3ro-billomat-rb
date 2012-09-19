@@ -80,15 +80,7 @@ in the following examples.
 
 
 
-## Resource: Invoices
 
-An invoice needs to have the `client_id` field set, e.g.
-
-    client = Billomat.res(:client).first
-
-    invoice = Billomat.res(:invoice).new
-    invoice.client_id = client.id
-    invoice.save
 
 =end
 module Billomat
