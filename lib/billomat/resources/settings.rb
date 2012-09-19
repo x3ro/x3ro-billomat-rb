@@ -1,15 +1,27 @@
 module Billomat::Resources
 
-  # Class representing a {setting}[http://www.billomat.com/en/api/settings/].
-  # As the Billomat API only supports retrieving all settings at once, the only method
-  # that should be called on this class is Setting#find (which calls find_single!)
-  # TODO: Implement that behaviour, so that the other methods cannot be called accidentally
-  #
-  # = Example
-  #
-  #     x = Billomat::Settings.find
-  #     x.currency_code # => "EUR"
-  #
+=begin
+Class representing a [Setting](http://www.billomat.com/en/api/settings/).
+As the Billomat API only supports retrieving all settings at once, the only method
+that should be called on this class is Setting#find (which calls find_single!)
+
+* TODO: Implement that behaviour, so that the other methods cannot be called accidentally
+
+
+# Example
+
+The Billomat API currently only supports retrieving all settings at once:
+
+    settings = Billomat.res(:settings).find
+    settings.currency_code # => "USD"
+
+Modifying settings is also supported:
+
+    x = Billomat.res(:settings).find
+    x.currency_code = "USD"
+    x.save # => true
+
+=end
   class Settings < Billomat::Base
 
     self.schema do

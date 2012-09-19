@@ -79,22 +79,6 @@ in the following examples.
     Billomat.res(:client).find(:all, :params => { :name => "google" })
 
 
-## Resource: Settings
-
-The Billomat API currently only supports retrieving all settings at once:
-
-    Billomat.res(:settings).find
-
-will yield
-
-    => #<Billomat::Resources::Settings:0x007fc850b1e138 @attributes={...} prefix_options={}, @persisted=true>
-
-Modifying settings is also supported:
-
-    x = Billomat.res(:settings).find
-    x.currency_code = "USD"
-    x.save # => true
-
 
 ## Resource: Invoices
 
