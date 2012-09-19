@@ -186,7 +186,7 @@ module Billomat
     def res(resource)
       raise NotInitializedError.new("Billomat account or key was not set!") if @account.nil? or @key.nil?
 
-      resource = resource.to_s.capitalize.to_sym
+      resource = resource.to_s.split('_').map { |x| x.capitalize }.join('').to_sym
       raise ArgumentError.new("Unknown resource type '#{resource}'") if not Billomat::Resources.constants.include? resource
 
       Billomat::Resources.const_get(resource)
