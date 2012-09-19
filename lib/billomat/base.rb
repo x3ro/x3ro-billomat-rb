@@ -1,5 +1,3 @@
-# possibly ResourceWithActiveArchived
-
 module Billomat
 
   class Base < ActiveResource::Base
