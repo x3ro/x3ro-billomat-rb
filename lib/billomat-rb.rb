@@ -84,6 +84,12 @@ of the particular resource.
     Billomat.res(:client).find(:all, :params => { :name => "google" })
 
 
+## Getting information about the user accessing the API
+
+Information on identifying the user with whose credentials the API is being accessed,
+you can take a look at {Billomat::ResourceWithMyselfRecord}.
+
+
 
 # Currently implemented API resources
 
