@@ -6,6 +6,7 @@ module Billomat::Resources
   class Client < Billomat::Base
 
     include Billomat::ResourceWithMyselfRecord
+    extend Billomat::ResourceWithMyselfRecordStatic
 
     # We override find so that one cannot call it without parameters, as this results
     # in a ActiveResource exception, because, for some reason, when calling #find(),
@@ -18,17 +19,7 @@ module Billomat::Resources
     end
 
 
-    # Implement access to own user account info as documented on
-    # [Billomat Clients API](http://www.billomat.com/en/api/clients/) in the
-    # "Your own account info" section.
-    #
-    # @return [Billomat::Resources::Client]
-    #
-    def self.myself
-      m = find(:myself)
-      m.myselfRecord = true
-      m
-    end
+
 
   end
 

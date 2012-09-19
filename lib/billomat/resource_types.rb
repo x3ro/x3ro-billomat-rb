@@ -68,4 +68,18 @@ It appears that these special records can not be saved through the API.
 
   end
 
+  module ResourceWithMyselfRecordStatic
+    # Implement access to own user account info as documented on
+    # [Billomat Clients API](http://www.billomat.com/en/api/clients/) in the
+    # "Your own account info" section.
+    #
+    # @return [Billomat::Resources::Client]
+    #
+    def myself
+      m = find(:myself)
+      m.myselfRecord = true
+      m
+    end
+  end
+
 end
