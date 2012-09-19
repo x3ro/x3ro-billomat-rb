@@ -57,7 +57,7 @@ you a few examples on how to use this gem :)
 
 # Resources
 
-All the following examples assume you have initialized the API properly.
+All examples within the documentation assume you have initialized the API properly.
 
 
 ## Basic resource access
@@ -68,23 +68,34 @@ The following resources **do not** work this way, and have separate usage exampl
 * Invoices (only because of mandatory field `client_id`)
 
 Every other resource provided by this API can be accessed using the techniques depicted
-in the following examples.
+in the following examples. Additional examples may be found in the class documentation of
+of the particular resource.
 
-#### Retrieving all clients
+### Retrieving all clients
 
     Billomat.res(:client).all
 
-#### Retrieving a client with a known id (see the note on IDs)
+### Retrieving a client with a known id (see the note on IDs)
 
     Billomat.res(:client).find(123456)
 
-#### Searching for a client with a certain name:
+### Searching for a client with a certain name:
 
     Billomat.res(:client).find(:all, :params => { :name => "google" })
 
 
 
+# Currently implemented API resources
 
+* {Billomat::Resources::Article}
+* {Billomat::Resources::Client}
+* {Billomat::Resources::Invoice}
+* {Billomat::Resources::Myself}
+* {Billomat::Resources::Offer}
+* {Billomat::Resources::OfferItem}
+* {Billomat::Resources::Settings}
+* {Billomat::Resources::Unit}
+* {Billomat::Resources::User}
 
 =end
 module Billomat
