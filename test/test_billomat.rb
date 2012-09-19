@@ -1,6 +1,9 @@
+require 'simplecov'
+SimpleCov.start
 require 'test/unit'
 require 'billomat-rb'
 require 'turn/autorun'
+
 
 puts "!!! Running these tests will MODIFY the account settings of the given account !!!"
 puts "Do you want to continue? (yes/no)"

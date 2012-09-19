@@ -13,6 +13,7 @@ group :development do
   gem "yard", "~> 0.8.2"
   gem "redcarpet" # For YARD
   gem "turn"
+  gem "simplecov"
 end
 
 gem "activeresource", "~> 3.2.8"
