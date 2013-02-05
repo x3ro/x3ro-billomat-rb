@@ -9,11 +9,6 @@ credit note can be retrieved like so:
 =end
   class CreditNote < Billomat::Base
     self.element_name = 'credit-note'
-
-    #def self.for_offer(offer_id)
-    #  find(:all, :params => {:offer_id => offer_id})
-    #end
-
   end
 
 end
