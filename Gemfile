@@ -7,13 +7,18 @@ source "http://rubygems.org"
 # Include everything needed to run rake, tests, features, etc.
 group :development do
   gem "shoulda", ">= 0"
-  gem "rdoc", "~> 3.12"
-  gem "bundler", "~> 1.1.0"
-  gem "jeweler", "~> 1.8.4"
-  gem "yard", "~> 0.8.2"
+  gem "bundler"
+  gem "jeweler"
+  gem "yard"
   gem "redcarpet" # For YARD
   gem "turn"
   gem "simplecov"
 end
+
+# Since ActiveSupport (and hence ActiveResource) has trouble
+# deserializing an XML "correctly" (I'm aware that the definition
+# of correct might vary), we have to additionally parse the XML
+# using nokogiri.
+gem "nokogiri"
 
 gem "activeresource", "~> 3.2.8"

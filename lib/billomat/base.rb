@@ -1,12 +1,23 @@
+require 'nokogiri'
+
 module Billomat
 
   class Base < ActiveResource::Base
-
     # Set format to XML because it is the format documented in the Billomat API docs.
     # TODO: Implement possiblity to opt-in to use JSON format
-    self.format = :xml
+    self.format = :billomat_xml
 
     class << self
+
+      # This value is set when a collection is fetched via the Billomat API,
+      # and will contain all attributes set in the XML root node. This is necessary
+      # because the Billomat API stores information on paging in the XML root node,
+      # and that information is necessary if one wants to fetch all elements from
+      # a certain resource (see http://www.billomat.com/en/api/basics on Billomat API
+      # paging). An additional modification necessary for this to work was a custom
+      # xml formatter, BillomatXmlFormatter.
+      #
+      attr_reader :root_attributes
 
       # TODO: Add the dasherize_xml = false behaviour the Rails3 way
       # http://stackoverflow.com/questions/5438361/use-underscores-instead-of-dashes-with-activeresource-xml-set-dasherize-to-fal
@@ -45,6 +56,15 @@ module Billomat
         "#{prefix(prefix_options)}#{collection_name}/#{URI.parser.escape id.to_s}#{query_string(query_options)}"
       end
 
+
+      # Make find_every store the attributes of the root XML node to get Billomat
+      # API's paging information. See the "root_attributes" for more info.
+      def find_every(options)
+        result = super(options)
+        xml = Nokogiri::XML(_format.last_decoded)
+        @root_attributes = xml.root.attributes()
+        result
+      end
     end
 
 

@@ -235,6 +235,7 @@ end
 """
 
 
+require File.dirname(__FILE__) + '/billomat/billomat_xml_format'
 require File.dirname(__FILE__) + '/billomat/exceptions'
 require File.dirname(__FILE__) + '/billomat/resource_types'
 require File.dirname(__FILE__) + '/billomat/base'
