@@ -54,7 +54,7 @@ Rake::Task["console"].clear
 task :console do
   require 'irb'
   require 'pp'
-  require './lib/billomat-rb'
+  require './lib/x3ro-billomat-rb'
 
   # Make sure API credentials for the unit tests are supplied
   if ENV['ACC'].nil? or ENV['KEY'].nil?
