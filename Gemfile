@@ -13,6 +13,7 @@ group :development do
   gem "redcarpet" # For YARD
   gem "turn"
   gem "simplecov"
+  gem "ripl"
 end
 
 # Since ActiveSupport (and hence ActiveResource) has trouble
