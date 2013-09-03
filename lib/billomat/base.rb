@@ -58,8 +58,16 @@ module Billomat
       def find_every(options)
         result = super(options)
         xml = Nokogiri::XML(_format.last_decoded)
-        @root_attributes = xml.root.attributes()
+        @root_attributes = valuesToStrings(xml.root.attributes())
         result
+      end
+
+      private
+
+      # Converts all values of hash, where the values are non
+      # strings, to a hash where all values are strings.
+      def valuesToStrings(attrs)
+        Hash[attrs.map { |k,v| [k, v.to_s] }]
       end
     end
 
