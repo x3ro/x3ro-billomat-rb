@@ -22,4 +22,4 @@ end
 # using nokogiri.
 gem "nokogiri"
 
-gem "activeresource", "~> 3.2.8"
+gem "activeresource", "~> 5.1.1"
