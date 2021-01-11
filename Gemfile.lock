@@ -55,7 +55,7 @@ GEM
     rake (10.1.0)
     rdoc (4.0.1)
       json (~> 1.4)
-    redcarpet (3.0.0)
+    redcarpet (3.5.1)
     ripl (0.7.0)
       bond (~> 0.4.2)
     shoulda (3.5.0)
